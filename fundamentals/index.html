@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fundamentals of Spectroscopy Notes · Urvashi Gupta</title>
+  <meta name="description" content="Fundamentals of Spectroscopy: What spectroscopy is, how light interacts with matter, the electromagnetic spectrum, the types of transitions and the major techniques at a glance." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M24 6h16v4h-3v14l15 26a6 6 0 0 1-5 9H17a6 6 0 0 1-5-9l15-26V10h-3z' fill='%239b5de5'/><path d='M18 44h28l5 8a3 3 0 0 1-3 4H16a3 3 0 0 1-3-4z' fill='%2300f5d4'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body data-page="fundamentals" data-base="../">
+  <canvas id="molecules" aria-hidden="true"></canvas>
+  <header class="nav" id="nav"></header>
+
+  <main id="top">
+    <!-- TOPIC HEADER -->
+    <section class="topic-hero" id="topicHero" style="--c: var(--c-fund)">
+      <div class="th-text reveal">
+        <nav class="crumb" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>Fundamentals of Spectroscopy</nav>
+        <p class="eyebrow"><span class="dot"></span> Series 01 · Spectroscopy notes</p>
+        <h1>Fundamentals of Spectroscopy</h1>
+        <p class="lead">What spectroscopy is, how light interacts with matter, the electromagnetic spectrum, the types of transitions and the major techniques at a glance.</p>
+        <div class="formula-row">
+          <code class="formula">ΔE = hν = hc/λ</code>
+          <code class="formula">c = λν</code>
+          <code class="formula">ν̃ = 1/λ</code>
+        </div>
+        <div class="cta">
+          <a href="#notes" class="btn primary">Read the notes <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#lab" class="btn ghost">Mini lab</a>
+          <a href="#quiz" class="btn ghost">Take the quiz</a>
+        </div>
+      </div>
+      <div class="th-card reveal">
+        <span class="th-sym" data-len="2">hν</span>
+        <div class="th-stats">
+          <div><b id="topicPages">–</b><span>pages</span></div>
+          <div><b id="topicTools">–</b><span>tools</span></div>
+          <div><b id="topicRead">0</b><span>you've read</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section id="notes" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span> The notes</p>
+        <h2>Illustrated pages</h2>
+        <p class="muted">Tap any page to open it full-screen. Zoom, flip through with ← →, and download.</p>
+      </div>
+      <div class="toolbar reveal">
+        <label class="search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Search these pages…" />
+        </label>
+      </div>
+      <div id="groups"></div>
+      <p id="empty" class="empty" hidden>No pages match that search.</p>
+    </section>
+
+    <!-- LAB -->
+    <section id="lab" class="section" style="--c: var(--c-fund)">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span> Mini lab</p>
+        <h2>Play with the concepts</h2>
+        <p class="muted">Interactive tools built from the formulas and tables in these notes.</p>
+      </div>
+      <div class="lab-grid">
+  <!-- EM explorer -->
+          <article class="tool wide reveal">
+            <header><h3>Electromagnetic spectrum explorer</h3></header>
+            <div class="em-bar" id="emBar">
+              <span>γ</span><span>X-ray</span><span>UV</span><span class="vis">Vis</span><span>IR</span><span>Micro</span><span>Radio</span>
+              <div class="em-marker" id="emMarker"></div>
+            </div>
+            <input type="range" id="emSlider" min="-12" max="1" step="0.01" value="-6.5" aria-label="Wavelength (log scale)" />
+            <div class="readouts">
+              <div><small>Wavelength λ</small><b id="emLambda">–</b></div>
+              <div><small>Frequency ν</small><b id="emFreq">–</b></div>
+              <div><small>Wavenumber ν̃</small><b id="emWn">–</b></div>
+              <div><small>Energy E = hν</small><b id="emE">–</b></div>
+              <div class="region-box"><small>Region · probes</small><b id="emRegion">–</b><span id="emProbe" class="muted"></span></div>
+              <div class="swatch-box"><small>Colour</small><span class="swatch" id="emSwatch"></span></div>
+            </div>
+            <div class="wave-wrap"><svg id="wave" viewBox="0 0 600 60" preserveAspectRatio="none"><path id="wavePath"/></svg></div>
+          </article>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span> Quiz</p>
+        <h2>Test yourself</h2>
+        <p class="muted">Tap an answer to get instant feedback and an explanation. Your best score is saved on this device.</p>
+      </div>
+      <div class="quiz-card reveal" id="quizCard">
+        <div class="quiz-top">
+          <div>
+            <span class="tag" id="quizTag"></span>
+            <h3 id="quizTitle"></h3>
+            <p class="muted small" id="quizSub"></p>
+          </div>
+          <div class="quiz-score">
+            <div class="ring" id="quizRing"><span id="quizScore">0/0</span></div>
+            <small class="muted" id="quizBest"></small>
+          </div>
+        </div>
+        <div class="progress"><span id="quizProg"></span></div>
+        <ol class="quiz-qs" id="quizQs"></ol>
+        <div class="quiz-foot">
+          <p id="quizMsg" class="quiz-msg"></p>
+          <div class="quiz-actions">
+            <a class="btn ghost" id="quizPoster" target="_blank" rel="noopener">View poster</a>
+            <button class="btn primary" id="quizReset">Try again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="section">
+      <div class="pager-row reveal" id="topicPager"></div>
+    </section>
+
+    <section class="section connect reveal">
+      <div class="connect-card">
+        <img src="../img/profile.jpg" alt="" class="mini-avatar" />
+        <div>
+          <h2>Save · Share · Follow</h2>
+          <p class="muted">New parts of the Spectroscopy Series land here first. Follow along for XPS and MS.</p>
+        </div>
+        <div class="socials big"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+  <script src="../app.js"></script>
+</body>
+</html>

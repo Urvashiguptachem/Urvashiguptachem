@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>UV-Vis Spectroscopy Notes · Urvashi Gupta</title>
+  <meta name="description" content="UV-Vis Spectroscopy: Electronic transitions, chromophores and λmax, instrumentation, the Beer–Lambert law, calibration and how to read and interpret a UV-Vis spectrum." />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><path d='M24 6h16v4h-3v14l15 26a6 6 0 0 1-5 9H17a6 6 0 0 1-5-9l15-26V10h-3z' fill='%239b5de5'/><path d='M18 44h28l5 8a3 3 0 0 1-3 4H16a3 3 0 0 1-3-4z' fill='%2300f5d4'/></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body data-page="uv" data-base="../">
+  <canvas id="molecules" aria-hidden="true"></canvas>
+  <header class="nav" id="nav"></header>
+
+  <main id="top">
+    <!-- TOPIC HEADER -->
+    <section class="topic-hero" id="topicHero" style="--c: var(--c-uv)">
+      <div class="th-text reveal">
+        <nav class="crumb" aria-label="Breadcrumb"><a href="../">Home</a><span>/</span>UV-Vis Spectroscopy</nav>
+        <p class="eyebrow"><span class="dot"></span> Series 02 · Spectroscopy notes</p>
+        <h1>UV-Vis Spectroscopy</h1>
+        <p class="lead">Electronic transitions, chromophores and λmax, instrumentation, the Beer–Lambert law, calibration and how to read and interpret a UV-Vis spectrum.</p>
+        <div class="formula-row">
+          <code class="formula">A = εbc</code>
+          <code class="formula">A = −log T</code>
+          <code class="formula">π→π* · n→π*</code>
+        </div>
+        <div class="cta">
+          <a href="#notes" class="btn primary">Read the notes <svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          <a href="#lab" class="btn ghost">Mini lab</a>
+          <a href="#quiz" class="btn ghost">Take the quiz</a>
+        </div>
+      </div>
+      <div class="th-card reveal">
+        <span class="th-sym" data-len="2">UV</span>
+        <div class="th-stats">
+          <div><b id="topicPages">–</b><span>pages</span></div>
+          <div><b id="topicTools">–</b><span>tools</span></div>
+          <div><b id="topicRead">0</b><span>you've read</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTES -->
+    <section id="notes" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span> The notes</p>
+        <h2>Illustrated pages</h2>
+        <p class="muted">Tap any page to open it full-screen. Zoom, flip through with ← →, and download.</p>
+      </div>
+      <div class="toolbar reveal">
+        <label class="search">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Search these pages…" />
+        </label>
+      </div>
+      <div id="groups"></div>
+      <p id="empty" class="empty" hidden>No pages match that search.</p>
+    </section>
+
+    <!-- LAB -->
+    <section id="lab" class="section" style="--c: var(--c-uv)">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span> Mini lab</p>
+        <h2>Play with the concepts</h2>
+        <p class="muted">Interactive tools built from the formulas and tables in these notes.</p>
+      </div>
+      <div class="lab-grid">
+  <!-- Beer Lambert -->
+          <article class="tool reveal">
+            <header><h3>Beer–Lambert calculator</h3></header>
+            <p class="big-formula">A = ε · b · c</p>
+            <div class="solve-for" role="radiogroup" aria-label="Solve for">
+              <span>Solve for</span>
+              <button data-solve="A" class="on">A</button><button data-solve="e">ε</button><button data-solve="b">b</button><button data-solve="c">c</button>
+            </div>
+            <div class="fields">
+              <label data-var="A">Absorbance A <input type="number" step="any" id="bl-A" value="0.65" /></label>
+              <label data-var="e">ε (L mol⁻¹ cm⁻¹) <input type="number" step="any" id="bl-e" value="13000" /></label>
+              <label data-var="b">Path length b (cm) <input type="number" step="any" id="bl-b" value="1" /></label>
+              <label data-var="c">Conc. c (mol L⁻¹) <input type="number" step="any" id="bl-c" value="0.00005" /></label>
+            </div>
+            <div class="cuvette-row">
+              <div class="cuvette"><div class="liquid" id="cuvLiquid"></div></div>
+              <div class="beam">
+                <div class="beam-in">I₀</div>
+                <div class="beam-out" id="beamOut">I</div>
+              </div>
+              <div class="bl-result">
+                <div id="blResult" class="result">–</div>
+                <div id="blT" class="muted"></div>
+                <div id="blWarn" class="warn"></div>
+              </div>
+            </div>
+          </article>
+
+  <!-- Calibration curve -->
+          <article class="tool reveal">
+            <header><h3>Calibration curve builder</h3></header>
+            <p class="muted small">Enter your standards (concentration, absorbance). A least-squares line through them gives the unknown's concentration.</p>
+            <div class="cal-table">
+              <div class="cal-head"><span>c (mM)</span><span>A</span><span></span></div>
+              <div id="calRows"></div>
+              <button class="mini-btn" id="calAdd">+ add standard</button>
+            </div>
+            <svg id="calPlot" class="plot" viewBox="0 0 320 170" preserveAspectRatio="none"></svg>
+            <div class="fields one">
+              <label>Unknown sample absorbance A <input type="number" step="any" id="calUnknown" value="0.52" /></label>
+            </div>
+            <div class="out-row">
+              <div><small>Fit</small><b id="calFit">–</b></div>
+              <div><small>R²</small><b id="calR2">–</b></div>
+              <div><small>Unknown c</small><b id="calC" class="hi">–</b></div>
+            </div>
+            <p id="calWarn" class="warn"></p>
+          </article>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="section">
+      <div class="section-head reveal">
+        <p class="eyebrow"><span class="dot"></span> Quiz</p>
+        <h2>Test yourself</h2>
+        <p class="muted">Tap an answer to get instant feedback and an explanation. Your best score is saved on this device.</p>
+      </div>
+      <div class="quiz-card reveal" id="quizCard">
+        <div class="quiz-top">
+          <div>
+            <span class="tag" id="quizTag"></span>
+            <h3 id="quizTitle"></h3>
+            <p class="muted small" id="quizSub"></p>
+          </div>
+          <div class="quiz-score">
+            <div class="ring" id="quizRing"><span id="quizScore">0/0</span></div>
+            <small class="muted" id="quizBest"></small>
+          </div>
+        </div>
+        <div class="progress"><span id="quizProg"></span></div>
+        <ol class="quiz-qs" id="quizQs"></ol>
+        <div class="quiz-foot">
+          <p id="quizMsg" class="quiz-msg"></p>
+          <div class="quiz-actions">
+            <a class="btn ghost" id="quizPoster" target="_blank" rel="noopener">View poster</a>
+            <button class="btn primary" id="quizReset">Try again</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- NEXT -->
+    <section class="section">
+      <div class="pager-row reveal" id="topicPager"></div>
+    </section>
+
+    <section class="section connect reveal">
+      <div class="connect-card">
+        <img src="../img/profile.jpg" alt="" class="mini-avatar" />
+        <div>
+          <h2>Save · Share · Follow</h2>
+          <p class="muted">New parts of the Spectroscopy Series land here first. Follow along for XPS and MS.</p>
+        </div>
+        <div class="socials big"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer" id="footer"></footer>
+  <script src="../app.js"></script>
+</body>
+</html>
